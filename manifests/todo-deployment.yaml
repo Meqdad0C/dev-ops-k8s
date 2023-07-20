@@ -15,6 +15,4 @@ spec:
       containers:
         - name: todo-app
           image: meqdad0/todo-app-k8:latest
-          ports:
-            - containerPort: 3000
               
