@@ -1,3 +1,6 @@
+const app = require('express')()
+let string = ''
+
 const randomString = (length = 10) => {
   const chars =
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
@@ -12,10 +15,18 @@ const randomString = (length = 10) => {
 }
 
 const generateRandomString = (length) => {
-  const string = randomString(length)
+  string = randomString(length)
   setInterval(() => {
     console.log(string)
   }, 5000)
 }
 
 generateRandomString()
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000')
+})
+
+app.get('/', (req, res) => {
+  res.send(`Random string: ${string} Time: ${new Date().toLocaleString()}`)
+})

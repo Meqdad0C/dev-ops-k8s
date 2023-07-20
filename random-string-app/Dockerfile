@@ -1,8 +1,10 @@
-FROM node:latest
+FROM node:16
 
 # Create app directory
 WORKDIR /usr/src/app
 
 COPY . .
 
-CMD [ "node", "random-string.js" ]
+RUN npm install
+
+CMD [ "npm", "start" ]
