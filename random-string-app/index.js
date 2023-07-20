@@ -1,3 +1,5 @@
+const { writeFile } = require('fs')
+
 const app = require('express')()
 let string = ''
 
@@ -17,6 +19,18 @@ const randomString = (length = 10) => {
 const generateRandomString = (length) => {
   string = randomString(length)
   setInterval(() => {
+    writeFile(
+      './files/random-string.txt',
+      `Random string: ${string} Time: ${new Date().toLocaleString()}`,
+      { flag: 'w' },
+      (err) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log('Random string saved to file!')
+      }
+    )
+
     console.log(string)
   }, 5000)
 }

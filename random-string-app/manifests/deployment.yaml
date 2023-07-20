@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output-app
     spec:
+      volumes: # Define volume
+        - name: shared-string
+          emptyDir: {}
       containers:
-        - name: log-output-app-dep
-          image: meqdad0/log-output-k8
+        - name: log-output-app
+          image: meqdad0/log-output-k8:latest
+          volumeMounts: # Mount volume
+          - name: shared-string
+            mountPath: /usr/src/app/files
+        - name: log-output-reader
+          image: meqdad0/hash-reader-k8:latest
+          volumeMounts: # Mount volume
+          - name: shared-string
+            mountPath: /usr/src/app/files
